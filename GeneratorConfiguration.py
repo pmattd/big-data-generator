@@ -31,8 +31,6 @@ class ConfigReader:
                 if field["type"] == "enumeration":
                     generators.append(self.create_enumerated_field_generator(field))
 
-            print(json.dumps(parsed_json, indent=4, sort_keys=True))
-
             return GeneratorConfiguration(parsed_json["intervalInSeconds"],
                                           parsed_json["path"],
                                           parsed_json["max-lines"],

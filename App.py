@@ -17,11 +17,13 @@ if __name__ == '__main__':
                                    file_writer=file_writer)
     file_generator.schedule()
 
-    print(config.max_lines)
+    print("generation completed")
 
-# run from command line
+# make the configuration an optional command line parameter
+# make the script run in a process
 # checkout other projects on github to see structure
 
-# csv writer/avro writer/parquet writer
+# avro writer/ parquet writer
 # max size in bytes
 # clean up files
+# logging
