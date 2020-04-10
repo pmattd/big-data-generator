@@ -1,0 +1,21 @@
+{
+  "intervalInSeconds": 5,
+  "path": "/dir/files",
+  "max-lines": 15,
+  "max-files": 3,
+  "fields": [
+    {
+      "type": "random-value",
+      "min": 1,
+      "max": 100
+    },
+    {
+      "type": "enumeration",
+      "values": [
+        "peter",
+        "paul",
+        "mary"
+      ]
+    }
+  ]
+}
