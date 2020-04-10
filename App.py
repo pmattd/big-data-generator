@@ -1,25 +1,26 @@
 from DataFile import DataLineGenerator
-from FileGenerator import FileGenerator, SequentialFileName
+from FileGenerator import FileGenerator, SequentialFileName, CsvWriter
 from GeneratorConfiguration import ConfigReader, GeneratorConfiguration
 
 if __name__ == '__main__':
-    config: GeneratorConfiguration = ConfigReader().read_json("testjson")
+    config: GeneratorConfiguration = ConfigReader().read_json("config.json")
 
     data_line_generator = DataLineGenerator(config.generators, ",")
-    fw = FileGenerator(interval=config.interval_in_seconds,
-                       lines=config.max_lines,
-                       max_files=config.max_files,
-                       path=config.path,
-                       generator=data_line_generator,
-                       file_name_generator=SequentialFileName("newfile"))
-    fw.schedule()
+
+    file_writer = CsvWriter(lines=config.max_lines,
+                            file_name_generator=SequentialFileName(config.base_filename),
+                            data_generator=data_line_generator)
+
+    file_generator = FileGenerator(interval=config.interval_in_seconds,
+                                   path=config.path,
+                                   max_files=config.max_files,
+                                   file_writer=file_writer)
+    file_generator.schedule()
 
     print(config.max_lines)
 
-# no separator at the end of the line
-# make into csv writer
 # run from command line
-# upload to github
+# checkout other projects on github to see structure
 
 # csv writer/avro writer/parquet writer
 # max size in bytes

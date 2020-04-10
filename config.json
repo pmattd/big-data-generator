@@ -3,6 +3,7 @@
   "path": "/dir/files",
   "max-lines": 15,
   "max-files": 3,
+  "base-filename": "data_",
   "fields": [
     {
       "type": "random-value",

@@ -5,17 +5,14 @@ import time
 class FileGenerator:
 
     # todo pass the generator as a lambda
-    # add a random number of lines as a possibility
-    # use the max size
+    # todo add a random number of lines as a possibility
+    # todo use the max size
 
-    def __init__(self, interval: int = 1, lines: int = 1, max_files: int = 1, path: str = "", generator=None,
-                 file_name_generator=None):
+    def __init__(self, interval: int = 1, path: str = "", max_files: int = 1, file_writer=None):
         self.interval = interval
-        self.path = path
-        self.lines = lines
         self.max_files = max_files
-        self.generator = generator
-        self.file_name_generator = file_name_generator
+        self.file_writer = file_writer
+        self.path = path
 
     def schedule(self):
         os.makedirs(self.path, 0o777, True)
@@ -24,9 +21,21 @@ class FileGenerator:
             time.sleep(self.interval)
 
     def write(self):
-        f = open(self.path + "/" + self.file_name_generator.get_name(), "w+")
+        self.file_writer.write(self.path)
+
+
+class CsvWriter:
+    def __init__(self, lines: int = 1,
+                 file_name_generator=None,
+                 data_generator=None):
+        self.lines = lines
+        self.file_name_generator = file_name_generator
+        self.data_generator = data_generator
+
+    def write(self, base_path):
+        f = open(base_path + "/" + self.file_name_generator.get_name() + ".csv", "w+")
         for i in range(self.lines):
-            f.write(self.generator.generate() + "\n")
+            f.write(self.data_generator.generate() + "\n")
         f.close()
 
 

@@ -30,9 +30,9 @@ class DataLineGenerator:
         self.separator = separator
 
     def generate(self):
-        line: str = ""
+        values = []
 
         for generator in self.generators:
-            line += generator.getVal() + self.separator
+            values.append(generator.getVal())
 
-        return line
+        return self.separator.join(values)
