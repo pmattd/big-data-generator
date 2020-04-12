@@ -8,6 +8,6 @@ def test_generate():
     assert line_generator.generate() == "hello,goodbye"
 
 
-def testEnumeratedFieldGenerator():
+def test_enumerated_field_generator():
     generator = EnumeratedFieldGenerator(["hello"])
     assert generator.getVal() == "hello"

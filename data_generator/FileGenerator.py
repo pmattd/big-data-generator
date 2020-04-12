@@ -6,7 +6,6 @@ class FileGenerator:
 
     # todo pass the generator as a lambda
     # todo add a random number of lines as a possibility
-    # todo use the max size
 
     def __init__(self, file_write_interval: int = 1, file_path: str = "", max_files: int = 1, file_writer=None):
         self.interval = file_write_interval
