@@ -1,8 +1,8 @@
 import argparse
 
-from DataFile import DataLineGenerator
-from FileGenerator import FileGenerator, SequentialFileName, CsvWriter
-from GeneratorConfiguration import ConfigReader, GeneratorConfiguration
+from data_generator.DataFile import DataLineGenerator
+from data_generator.FileGenerator import CsvWriter, SequentialFileName, FileGenerator
+from data_generator.GeneratorConfiguration import GeneratorConfiguration, ConfigReader
 
 
 def schedule(config_path):
@@ -29,9 +29,9 @@ if __name__ == '__main__':
     parser.add_argument("-c", "--config", help="path to a config file")
     args = parser.parse_args()
 
-    config_path = args.config if args.config else "config.json"
+    config_file_path = args.config if args.config else "config.json"
 
-    schedule(config_path)
+    schedule(config_file_path)
 
 # write some tests
 # checkout other projects on github to see structure (venv etc)

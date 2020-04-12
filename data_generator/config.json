@@ -1,7 +1,7 @@
 {
   "file-write-interval-in-seconds": 2,
   "path": "/dir/files",
-  "max-lines": 100,
+  "max-lines": 10,
   "line-write-interval-in-seconds": 1,
   "value-separator": ",",
   "max-files": 1,
