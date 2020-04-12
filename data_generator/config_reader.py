@@ -1,7 +1,8 @@
 import json
 from dataclasses import dataclass
 
-from data_generator.data_generator import RandomValueFieldGenerator, EnumeratedFieldGenerator, IdentityFieldGenerator
+from data_generator.data_line_generator import RandomValueFieldGenerator, EnumeratedFieldGenerator, \
+    IdentityFieldGenerator
 
 
 @dataclass()

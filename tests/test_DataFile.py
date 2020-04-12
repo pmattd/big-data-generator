@@ -1,4 +1,4 @@
-from data_generator.data_generator import EnumeratedFieldGenerator, DataLineGenerator
+from data_generator.data_line_generator import EnumeratedFieldGenerator, DataLineGenerator
 
 
 def test_generate():

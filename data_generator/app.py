@@ -1,8 +1,10 @@
 import argparse
+import logging
 
 from data_generator.config_reader import GeneratorConfiguration, ConfigReader
-from data_generator.data_generator import DataLineGenerator
+from data_generator.data_line_generator import DataLineGenerator
 from data_generator.file_generator import CsvWriter, SequentialFileName, FileGenerator
+from data_generator.log import configure_logging
 
 
 def schedule(config_path):
@@ -24,16 +26,22 @@ def schedule(config_path):
     print("generation completed")
 
 
+logger = logging.getLogger(__name__)
+
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument("-c", "--config", help="path to a config file")
+    parser.add_argument("-v", "--verbose", help="turn on verbose logging", action="store_true")
     args = parser.parse_args()
 
-    config_file_path = args.config if args.config else "config.json"
+    configure_logging(args.verbose)
+
+    config_file_path = args.config if args.config is not None else "config.json"
+
+    logger.debug('config file is {}'.format(config_file_path))
 
     schedule(config_file_path)
 
 # avro writer/ parquet writer
 # max size in bytes
 # clean up files
-# logging
