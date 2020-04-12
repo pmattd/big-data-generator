@@ -1,8 +1,8 @@
 import argparse
 
-from data_generator.DataFile import DataLineGenerator
-from data_generator.FileGenerator import CsvWriter, SequentialFileName, FileGenerator
-from data_generator.GeneratorConfiguration import GeneratorConfiguration, ConfigReader
+from data_generator.config_reader import GeneratorConfiguration, ConfigReader
+from data_generator.data_generator import DataLineGenerator
+from data_generator.file_generator import CsvWriter, SequentialFileName, FileGenerator
 
 
 def schedule(config_path):

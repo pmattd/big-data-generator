@@ -1,6 +1,6 @@
 import unittest
 
-from data_generator.DataFile import EnumeratedFieldGenerator, DataLineGenerator
+from data_generator.data_generator import EnumeratedFieldGenerator, DataLineGenerator
 
 
 class DataFileTest(unittest.TestCase):
