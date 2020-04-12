@@ -1,3 +1,4 @@
+import uuid
 from dataclasses import dataclass
 from random import randint
 
@@ -19,6 +20,12 @@ class RandomValueFieldGenerator:
 
     def getVal(self):
         return str(randint(self.min, self.max))
+
+
+@dataclass()
+class IdentityFieldGenerator:
+    def getVal(self):
+        return str(uuid.uuid4())
 
 
 class DataLineGenerator:
