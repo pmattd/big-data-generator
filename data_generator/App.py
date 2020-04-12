@@ -33,8 +33,6 @@ if __name__ == '__main__':
 
     schedule(config_file_path)
 
-# write some tests
-# checkout other projects on github to see structure (venv etc)
 # avro writer/ parquet writer
 # max size in bytes
 # clean up files
