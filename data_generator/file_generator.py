@@ -1,26 +1,57 @@
+import logging
 import os
 import time
+
+logger = logging.getLogger(__name__)
+
+
+# todo make immutable?
+class WriteState:
+    def __init__(self,
+                 max_data_size: int = 10000000):
+        self.max_data_size = max_data_size
+        self.current_data_size = 0
+        self.num_files = 0
+
+    def add_string(self, s):
+        self.add_data(len(s.encode('utf-8')))
+
+    def add_data(self, data_size):
+        self.current_data_size += data_size
+
+    def stop_writing(self):
+        return (self.max_data_size >= 0) and (self.current_data_size > self.max_data_size)
+
+    def print(self):
+        return "current data size: [{}] max data size : [{}]".format(self.current_data_size, self.max_data_size)
 
 
 class FileGenerator:
 
-    # todo pass the generator as a lambda
-    # todo add a random number of lines as a possibility
-
-    def __init__(self, file_write_interval: int = 1, file_path: str = "", max_files: int = 1, file_writer=None):
+    def __init__(self,
+                 file_write_interval: int = 1,
+                 file_path: str = "",
+                 max_files: int = 1,
+                 file_writer=None,
+                 write_state: WriteState = None):
         self.interval = file_write_interval
         self.max_files = max_files
         self.file_writer = file_writer
         self.path = file_path
+        self.write_state = write_state
 
     def schedule(self):
         os.makedirs(self.path, 0o777, True)
+
         for i in range(self.max_files):
             self.write()
             time.sleep(self.interval)
+            if self.write_state.stop_writing():
+                logger.debug("stopping writing {}".format(self.write_state.print()))
+                break
 
     def write(self):
-        self.file_writer.write(self.path)
+        self.write_state = self.file_writer.write(self.path, self.write_state)
 
 
 class CsvWriter:
@@ -34,15 +65,32 @@ class CsvWriter:
         self.file_name_generator = file_name_generator
         self.data_generator = data_generator
 
-    def write(self, base_path):
+    def write(self, base_path, write_state):
 
         f = open(base_path + "/" + self.file_name_generator.get_name() + ".csv", "w+")
+
         for i in range(self.lines):
-            f.write(self.data_generator.generate() + "\n")
-            if self.line_interval != -1:
-                f.flush()
-                time.sleep(self.line_interval)
+            line = self.data_generator.generate()
+
+            write_state.add_string(line)
+            if write_state.stop_writing():
+                break
+
+            f.write(line + "\n")
+
+            if self.line_interval != 0:
+                self.flush_and_wait(f)
+
         f.close()
+
+        return write_state
+
+    def flush_and_wait(self, f):
+        f.flush()
+        time.sleep(self.line_interval)
+
+    def utf8len(self, s):
+        return len(s.encode('utf-8'))
 
 
 class SequentialFileName:

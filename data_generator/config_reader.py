@@ -8,13 +8,14 @@ from data_generator.data_line_generator import RandomValueFieldGenerator, Enumer
 @dataclass()
 class GeneratorConfiguration:
     def __init__(self, file_write_interval_in_seconds=1, path="", max_lines=1, line_write_interval_in_seconds=0,
-                 max_files=1, base_filename="filename", value_separator=",",
+                 max_files=1, max_data_size=1000000, base_filename="filename", value_separator=",",
                  generators=None):
         self.file_write_interval_in_seconds = file_write_interval_in_seconds
         self.path = path
         self.max_lines = max_lines
         self.generators = generators
         self.max_files = max_files
+        self.max_data_size = max_data_size
         self.base_filename = base_filename
         self.line_write_interval_in_seconds = line_write_interval_in_seconds
         self.value_separator = value_separator
@@ -44,6 +45,7 @@ class ConfigReader:
                                           parsed_json["max-lines"],
                                           parsed_json["line-write-interval-in-seconds"],
                                           parsed_json["max-files"],
+                                          parsed_json["max-data-size-in_bytes"],
                                           parsed_json["base-filename"],
                                           parsed_json["value-separator"],
                                           generators)

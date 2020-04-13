@@ -3,7 +3,7 @@ import logging
 
 from data_generator.config_reader import GeneratorConfiguration, ConfigReader
 from data_generator.data_line_generator import DataLineGenerator
-from data_generator.file_generator import CsvWriter, SequentialFileName, FileGenerator
+from data_generator.file_generator import CsvWriter, SequentialFileName, FileGenerator, WriteState
 from data_generator.log import configure_logging
 
 
@@ -20,7 +20,8 @@ def schedule(config_path):
     file_generator = FileGenerator(file_write_interval=config.file_write_interval_in_seconds,
                                    file_path=config.path,
                                    max_files=config.max_files,
-                                   file_writer=file_writer)
+                                   file_writer=file_writer,
+                                   write_state=WriteState(config.max_data_size))
     file_generator.schedule()
 
     print("generation completed")
@@ -42,6 +43,6 @@ if __name__ == '__main__':
 
     schedule(config_file_path)
 
-# avro writer/ parquet writer
-# max size in bytes
-# clean up files
+# todo avro writer/ parquet writer
+# todo pass the generator as a lambda
+# todo add a random number of lines as a possibility

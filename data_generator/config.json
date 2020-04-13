@@ -1,11 +1,12 @@
 {
+  "base-filename": "data_",
+  "max-files": 1,
   "file-write-interval-in-seconds": 2,
   "path": "/dir/files",
-  "max-lines": 10,
   "line-write-interval-in-seconds": 1,
+  "max-lines": 10,
+  "max-data-size-in_bytes": 100,
   "value-separator": ",",
-  "max-files": 1,
-  "base-filename": "data_",
   "fields": [
     {
       "type": "identity",
