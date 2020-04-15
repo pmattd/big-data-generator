@@ -7,7 +7,7 @@ from random import randint
 class EnumeratedFieldGenerator:
     values: []
 
-    def getVal(self):
+    def get_val(self):
         numvalues = len(self.values)
         index = randint(0, numvalues - 1)
         return self.values[index]
@@ -18,13 +18,13 @@ class RandomValueFieldGenerator:
     min: int
     max: int
 
-    def getVal(self):
+    def get_val(self):
         return str(randint(self.min, self.max))
 
 
 @dataclass()
 class IdentityFieldGenerator:
-    def getVal(self):
+    def get_val(self):
         return str(uuid.uuid4())
 
 
@@ -40,6 +40,6 @@ class DataLineGenerator:
         values = []
 
         for generator in self.generators:
-            values.append(generator.getVal())
+            values.append(generator.get_val())
 
         return self.separator.join(values)

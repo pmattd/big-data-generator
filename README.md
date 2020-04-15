@@ -11,14 +11,14 @@ below is a description of the values in the configuration
 
 Parameter | Description
 ------------ | -------------
-base-filename | The filename to generate, will be appended with _n
+base-filename | The filename to generate. It will be appended with _n where n is a sequential number starting from 1
 max-files | Limit to the number of files that can be generated
 max-data-size-in-bytes | Limit to the amount of data to write (-1 if no limit) 
 file-write-interval-in-seconds | The time between each file being writer (0 if none) 
 line-write-interval-in-seconds | The delay between writing each line in the file (0 if none)
 path | Path to write the files
 value-separator | Separator to use between values in the csv
-fields | Definition of each column see below
+columns | Definition of each column see below
 
 ### Columns
 

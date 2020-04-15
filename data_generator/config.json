@@ -7,7 +7,7 @@
   "max-lines": 10,
   "max-data-size-in-bytes": 100,
   "value-separator": ",",
-  "fields": [
+  "columns": [
     {
       "type": "identity"
     },
