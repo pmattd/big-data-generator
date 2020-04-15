@@ -45,7 +45,7 @@ class ConfigReader:
                                           parsed_json["max-lines"],
                                           parsed_json["line-write-interval-in-seconds"],
                                           parsed_json["max-files"],
-                                          parsed_json["max-data-size-in_bytes"],
+                                          parsed_json["max-data-size-in-bytes"],
                                           parsed_json["base-filename"],
                                           parsed_json["value-separator"],
                                           generators)
