@@ -3,8 +3,13 @@ from dataclasses import dataclass
 from random import randint
 
 
+class ValueGenerator:
+    def getVal(self):
+        raise NotImplementedError("this is an interface use a subclass")
+
+
 @dataclass()
-class EnumeratedFieldGenerator:
+class EnumeratedFieldGenerator(ValueGenerator):
     values: []
 
     def getVal(self):
@@ -14,7 +19,7 @@ class EnumeratedFieldGenerator:
 
 
 @dataclass()
-class RandomValueFieldGenerator:
+class RandomValueFieldGenerator(ValueGenerator):
     min: int
     max: int
 
@@ -23,14 +28,14 @@ class RandomValueFieldGenerator:
 
 
 @dataclass()
-class IdentityFieldGenerator:
+class IdentityFieldGenerator(ValueGenerator):
     def getVal(self):
         return str(uuid.uuid4())
 
 
 class DataLineGenerator:
 
-    def __init__(self, generators=None, separator=" "):
+    def __init__(self, generators: [ValueGenerator] = None, separator=" "):
         if generators is None:
             generators = []
         self.generators = generators

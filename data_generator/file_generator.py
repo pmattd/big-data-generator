@@ -22,9 +22,8 @@ class WriteState:
     def stop_writing(self):
         return (self.max_data_size >= 0) and (self.current_data_size > self.max_data_size)
 
-    def print(self):
+    def __str__(self):
         return "current data size: [{}] max data size : [{}]".format(self.current_data_size, self.max_data_size)
-
 
 class FileGenerator:
 
@@ -47,7 +46,7 @@ class FileGenerator:
             self.write()
             time.sleep(self.interval)
             if self.write_state.stop_writing():
-                logger.debug("stopping writing {}".format(self.write_state.print()))
+                logger.debug("stopping writing {}".format(str(self.write_state)))
                 break
 
     def write(self):
