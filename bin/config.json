@@ -1,0 +1,28 @@
+{
+  "base-filename": "data_",
+  "max-files": 1,
+  "file-write-interval-in-seconds": 2,
+  "path": "/dir/files",
+  "line-write-interval-in-seconds": 1,
+  "max-lines": 10,
+  "max-data-size-in-bytes": 100,
+  "value-separator": ",",
+  "columns": [
+    {
+      "type": "identity"
+    },
+    {
+      "type": "random-value",
+      "min": 1,
+      "max": 100
+    },
+    {
+      "type": "enumeration",
+      "values": [
+        "peter",
+        "paul",
+        "mary"
+      ]
+    }
+  ]
+}
