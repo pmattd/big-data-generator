@@ -46,7 +46,7 @@ class FileGenerator:
             self.write()
             time.sleep(self.interval)
             if self.write_state.stop_writing():
-                logger.info("stopping writing {}".format(print(self.write_state)))
+                logger.info("stopping writing {}".format(str(self.write_state)))
                 break
 
     def write(self):
