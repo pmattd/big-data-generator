@@ -4,7 +4,7 @@ from random import randint
 
 
 class ValueGenerator:
-    def getVal(self):
+    def get_val(self):
         raise NotImplementedError("this is an interface use a subclass")
 
 
