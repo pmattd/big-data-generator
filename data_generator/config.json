@@ -5,13 +5,11 @@
   "path": "/dir/files",
   "line-write-interval-in-seconds": 1,
   "max-lines": 10,
-  "max-data-size-in_bytes": 100,
+  "max-data-size-in-bytes": 100,
   "value-separator": ",",
-  "fields": [
+  "columns": [
     {
-      "type": "identity",
-      "min": 1,
-      "max": 100
+      "type": "identity"
     },
     {
       "type": "random-value",

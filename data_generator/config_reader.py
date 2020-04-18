@@ -32,20 +32,20 @@ class ConfigReader:
 
             # todo change to switch
 
-            for field in parsed_json["fields"]:
+            for field in parsed_json["columns"]:
                 if field["type"] == "random-value":
                     generators.append(self.create_random_value_generator(field))
                 if field["type"] == "enumeration":
-                    generators.append(self.create_enumerated_field_generator(field))
+                    generators.append(self.create_enumeration_generator(field))
                 if field["type"] == "identity":
-                    generators.append(self.create_identity_field_generator())
+                    generators.append(self.create_identity_generator())
 
             return GeneratorConfiguration(parsed_json["file-write-interval-in-seconds"],
                                           parsed_json["path"],
                                           parsed_json["max-lines"],
                                           parsed_json["line-write-interval-in-seconds"],
                                           parsed_json["max-files"],
-                                          parsed_json["max-data-size-in_bytes"],
+                                          parsed_json["max-data-size-in-bytes"],
                                           parsed_json["base-filename"],
                                           parsed_json["value-separator"],
                                           generators)
@@ -55,9 +55,9 @@ class ConfigReader:
         return RandomValueFieldGenerator(json["min"], json["max"])
 
     @staticmethod
-    def create_enumerated_field_generator(json):
+    def create_enumeration_generator(json):
         return EnumeratedFieldGenerator(json["values"])
 
     @staticmethod
-    def create_identity_field_generator():
+    def create_identity_generator():
         return IdentityFieldGenerator()
