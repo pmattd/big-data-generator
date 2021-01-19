@@ -1,22 +1,26 @@
 {
   "base-filename": "data_",
-  "max-files": 1,
-  "file-write-interval-in-seconds": 2,
-  "path": "/dir/files",
-  "line-write-interval-in-seconds": 1,
+  "max-files": 30,
+  "file-write-interval-in-seconds": 10,
+  "path": "C:/Users/pmatt/Documents/Dev/big-data-env/source/customers",
+  "line-write-interval-in-seconds": 0,
   "max-lines": 10,
-  "max-data-size-in-bytes": 100,
+  "max-data-size-in-bytes": -1,
   "value-separator": ",",
+  "header": true,
   "columns": [
     {
+      "name": "identity",
       "type": "identity"
     },
     {
+      "name": "random",
       "type": "random-value",
       "min": 1,
       "max": 100
     },
     {
+      "name": "name",
       "type": "enumeration",
       "values": [
         "peter",

@@ -58,15 +58,22 @@ class CsvWriter:
                  lines: int = 1,
                  line_write_interval: int = 0,
                  file_name_generator=None,
-                 data_generator=None):
+                 data_generator=None,
+                 header=False):
         self.lines = lines
         self.line_interval = line_write_interval
         self.file_name_generator = file_name_generator
         self.data_generator = data_generator
+        self.header = header
 
     def write(self, base_path, write_state):
 
         f = open(base_path + "/" + self.file_name_generator.get_name() + ".csv", "w+")
+
+        if self.header:
+            header = self.data_generator.generateHeader()
+            write_state.add_string(header)
+            f.write(header + "\n")
 
         for i in range(self.lines):
             line = self.data_generator.generate()

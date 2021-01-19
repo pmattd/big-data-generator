@@ -15,7 +15,8 @@ def schedule(config_path):
     file_writer = CsvWriter(lines=config.max_lines,
                             line_write_interval=config.line_write_interval_in_seconds,
                             file_name_generator=SequentialFileName(config.base_filename),
-                            data_generator=data_line_generator)
+                            data_generator=data_line_generator,
+                            header=config.header)
 
     file_generator = FileGenerator(file_write_interval=config.file_write_interval_in_seconds,
                                    file_path=config.path,

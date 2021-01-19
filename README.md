@@ -19,6 +19,7 @@ line-write-interval-in-seconds | The delay between writing each line in the file
 path | Path to write the files
 value-separator | Separator to use between values in the csv
 columns | Definition of each column see below
+header | add a header row to the beginning of the data, mainly for csv type files, uses the name of each column
 
 ### Columns
 
@@ -30,6 +31,7 @@ enumeration | Generates a randomly selected value between the given possibilitie
 
 ## Running
 python app.py
+or use the supplied .bat file
 
 ### Command line params 
 

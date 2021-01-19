@@ -2,8 +2,13 @@ import uuid
 from dataclasses import dataclass
 from random import randint
 
-
+@dataclass()
 class ValueGenerator:
+    name: str
+
+    def get_name(self):
+        return self.name
+
     def get_val(self):
         raise NotImplementedError("this is an interface use a subclass")
 
@@ -35,7 +40,7 @@ class IdentityFieldGenerator(ValueGenerator):
 
 class DataLineGenerator:
 
-    def __init__(self, generators: [ValueGenerator] = None, separator=" "):
+    def __init__(self, generators: [ValueGenerator] = None, separator=";"):
         if generators is None:
             generators = []
         self.generators = generators
@@ -46,5 +51,12 @@ class DataLineGenerator:
 
         for generator in self.generators:
             values.append(generator.get_val())
+
+        return self.separator.join(values)
+
+    def generateHeader(self):
+        values = []
+        for generator in self.generators:
+            values.append(generator.get_name())
 
         return self.separator.join(values)
