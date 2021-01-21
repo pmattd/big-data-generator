@@ -13,8 +13,8 @@ Parameter | Description
 ------------ | -------------
 base-filename | The filename to generate. It will be appended with _n where n is a sequential number starting from 1
 max-files | Limit to the number of files that can be generated
-max-data-size-in-bytes | Limit to the amount of data to write (-1 if no limit) 
-file-write-interval-in-seconds | The time between each file being writer (0 if none) 
+max-data-size-in-bytes | Limit to the amount of data to write (-1 if no limit)
+file-write-interval-in-seconds | The time to pause between the end of one file and the start of the next (0 if none)
 line-write-interval-in-seconds | The delay between writing each line in the file (0 if none)
 path | Path to write the files
 value-separator | Separator to use between values in the csv
@@ -28,6 +28,7 @@ Column | Description
 identity | Generates a uuid value
 random-value | Generates a random integer value between the given min and max
 enumeration | Generates a randomly selected value between the given possibilities
+date-time | Generates a utc date-time using on the current time, randomized between the upper and lower bounds i.e. values of lower: -3600 and upper: 3600 will give a range of current time minus 1 hr and plus 1 hr
 
 ## Running
 python app.py

@@ -2,7 +2,7 @@ import json
 from dataclasses import dataclass
 
 from data_generator.data_line_generator import RandomValueFieldGenerator, EnumeratedFieldGenerator, \
-    IdentityFieldGenerator
+    IdentityFieldGenerator, DateTimeGenerator
 
 
 @dataclass()
@@ -31,9 +31,6 @@ class ConfigReader:
             parsed_json = json.load(f)
             generators = []
 
-            # todo change to switch
-
-
             for field in parsed_json["columns"]:
                 if field["type"] == "random-value":
                     generators.append(self.create_random_value_generator(field))
@@ -41,6 +38,8 @@ class ConfigReader:
                     generators.append(self.create_enumeration_generator(field))
                 if field["type"] == "identity":
                     generators.append(self.create_identity_generator(field))
+                if field["type"] == "date-time":
+                    generators.append(self.create_datetime_generator(field))
 
             return GeneratorConfiguration(parsed_json["file-write-interval-in-seconds"],
                                           parsed_json["path"],
@@ -64,3 +63,7 @@ class ConfigReader:
     @staticmethod
     def create_identity_generator(json):
         return IdentityFieldGenerator(json["name"])
+
+    @staticmethod
+    def create_datetime_generator(json):
+        return DateTimeGenerator(json["name"], json["format"], json["lower"], json["upper"])
